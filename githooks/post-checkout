@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Reinstalling Node Modules, please wait..."
+npm install

@@ -1,0 +1,9 @@
+#!/usr/bin/zsh
+message=$(cat .git/COMMIT_EDITMSG)
+subject=$(echo $message | grep 'MOTIVO DEL COMMIT:')
+implementation=$(echo $message | grep 'IMPLEMENTACIÓN:')
+if ! [ -z $subject && -z $implementation ]
+    then
+	    echo "Bad Commit message syntax"
+	    exit 1
+fi

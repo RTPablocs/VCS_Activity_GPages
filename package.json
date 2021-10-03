@@ -76,5 +76,7 @@
     "modernizr-config.json",
     "README.md"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "eslint-plugin-html": "^6.2.0"
+  }
 }

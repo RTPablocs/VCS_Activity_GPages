@@ -1,0 +1,33 @@
+#!/usr/bin/zsh
+specialChars="á â à é è ê í ì î ó ò ô ú ù û"
+executeLinter=$(npx eslint --plugin html --ext .html src/*.html)
+lastCommitFilters=$(git diff --cached --name-only)
+
+for file in $lastCommitFilters
+	do
+		for char in $specialChars
+			do
+				charAtFile=$(cat $file | grep $char)
+				if [ -z $charAtFile ]
+					then
+						echo 'Special Char not found at file: ' $file
+				else
+					echo 'Special Char found at file:' $file
+					echo 'Needs Manual Revision, commit Will be aborted'
+					exit 1
+				fi
+			done
+	done
+
+if [ -z $executeLinter ]
+	then 
+	echo "Everything OK with Eslint"
+	exit 0
+		
+else 
+
+
+	echo  "Error With Eslint, needs manual revision here
+	$executeLinter"
+	exit 1
+fi
